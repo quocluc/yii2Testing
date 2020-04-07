@@ -3,6 +3,7 @@
 use yii\helpers\Html;
 use yii\grid\GridView;
 use yii\widgets\Pjax;
+
 /* @var $this yii\web\View */
 /* @var $searchModel backend\models\search\Notes */
 /* @var $dataProvider yii\data\ActiveDataProvider */
@@ -17,28 +18,31 @@ $this->params['breadcrumbs'][] = $this->title;
     <p>
         <?= Html::a('Create Notes', ['create'], ['class' => 'btn btn-success']) ?>
     </p>
+    <div class="grid">
+        <div class="grid-loading" id="grid-loading">
+            <div class="spinner-border" role="status">
+                <span class="sr-only">Loading...</span>
+            </div>
+        </div>
+        <?php Pjax::begin([
+            'scrollTo' => 1,
+        ]); ?>
+        <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
-    <?php Pjax::begin([
-            'clientOptions'=>[
-                    'pjax:start'=>'console.log("ádfsadf")'
-            ]
-    ]); ?>
-    <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
+        <?= GridView::widget([
+            'dataProvider' => $dataProvider,
+            'filterModel' => $searchModel,
 
-    <?= GridView::widget([
-        'dataProvider' => $dataProvider,
-        'filterModel' => $searchModel,
+            'columns' => [
+                ['class' => 'yii\grid\SerialColumn'],
 
-        'columns' => [
-            ['class' => 'yii\grid\SerialColumn'],
+                'id',
+                'note:ntext',
 
-            'id',
-            'note:ntext',
+                ['class' => 'yii\grid\ActionColumn'],
+            ],
+        ]) ?>
 
-            ['class' => 'yii\grid\ActionColumn'],
-        ],
-    ]); ?>
-
-    <?php Pjax::end(); ?>
-
+        <?php Pjax::end(); ?>
+    </div>
 </div>
