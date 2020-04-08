@@ -1,6 +1,7 @@
 <?php
 
 /* @var $this \yii\web\View */
+
 /* @var $content string */
 
 use backend\assets\AppAsset;
@@ -25,48 +26,74 @@ AppAsset::register($this);
 </head>
 <body>
 <?php $this->beginBody() ?>
-
-<div class="wrap">
+<header>
     <?php
     NavBar::begin([
         'brandLabel' => Yii::$app->name,
         'brandUrl' => Yii::$app->homeUrl,
         'options' => [
-            'class' => 'navbar navbar-expand-md navbar-light bg-dark',
+            'class' => 'navbar navbar-expand-sm navbar-dark bg-dark',
         ],
     ]);
     $menuItems = [
         ['label' => 'Home', 'url' => ['/site/index']],
     ];
-    if (Yii::$app->user->isGuest) {
-        $menuItems[] = ['label' => 'Login', 'url' => ['/site/login']];
-    } else {
-        $menuItems[] = '<li>'
-            . Html::beginForm(['/site/logout'], 'post')
-            . Html::submitButton(
-                'Logout (' . Yii::$app->user->identity->username . ')',
-                ['class' => 'btn btn-link logout']
-            )
-            . Html::endForm()
-            . '</li>';
-    }
+
     echo Nav::widget([
-        'options' => ['class' => 'navbar-nav navbar-right'],
-        'items' => $menuItems,
+        'items' => [
+            [
+                'label' => 'Home',
+                'url' => ['site/index'],
+                'linkOptions' => [],
+            ],
+            [
+                'label' => 'Notes',
+                'url' => ['note/index'],
+                'linkOptions' => [],
+            ],
+
+            [
+                'label' => 'Login',
+                'url' => ['site/login'],
+                'visible' => Yii::$app->user->isGuest
+            ],
+
+        ],
+        'options' => ['class' => 'navbar-nav mr-auto'],
+    ]);
+    ?>
+    <form class="form-inline my-2 my-lg-0">
+        <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+    </form>
+    <?php
+
+    echo Nav::widget([
+        'items' => [
+            [
+                'label' => 'Logout',
+                'url' => ['site/login'],
+                'visible' => !Yii::$app->user->isGuest
+            ],
+        ],
+        'options' => ['class' => 'navbar-nav'],
     ]);
     NavBar::end();
     ?>
+</header>
 
     <div class="container">
-        <?= Breadcrumbs::widget([
-            'itemTemplate' => "\n\t<li class=\"breadcrumb-item\"><i>{link}</i></li>\n", // template for all links
-            'activeItemTemplate' => "\t<li class=\"breadcrumb-item active\">{link}</li>\n", // template for the active link
-            'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
-        ]) ?>
+        <nav aria-label="breadcrumb">
+            <?= Breadcrumbs::widget([
+                'tag' => 'ol',
+                'itemTemplate' => '<li class="breadcrumb-item"><i>{link}</i></li>',
+                'activeItemTemplate' => '<li class="breadcrumb-item active">{link}</li>',
+                'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
+            ]) ?>
+        </nav>
         <?= Alert::widget() ?>
         <?= $content ?>
     </div>
-</div>
 
 <footer class="footer">
     <div class="container">

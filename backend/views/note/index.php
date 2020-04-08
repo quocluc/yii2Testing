@@ -1,5 +1,7 @@
 <?php
 
+use yii\grid\ActionColumn;
+use yii\grid\SerialColumn;
 use yii\helpers\Html;
 use yii\grid\GridView;
 use yii\widgets\Pjax;
@@ -20,29 +22,58 @@ $this->params['breadcrumbs'][] = $this->title;
     </p>
     <div class="grid">
         <div class="grid-loading" id="grid-loading">
-            <div class="spinner-border" role="status">
+            <div class="spinner-grow text-primary" role="status">
+                <span class="sr-only">Loading...</span>
+            </div>
+            <div class="spinner-grow text-secondary" role="status">
+                <span class="sr-only">Loading...</span>
+            </div>
+            <div class="spinner-grow text-success" role="status">
+                <span class="sr-only">Loading...</span>
+            </div>
+            <div class="spinner-grow text-danger" role="status">
+                <span class="sr-only">Loading...</span>
+            </div>
+            <div class="spinner-grow text-warning" role="status">
+                <span class="sr-only">Loading...</span>
+            </div>
+            <div class="spinner-grow text-info" role="status">
+                <span class="sr-only">Loading...</span>
+            </div>
+            <div class="spinner-grow text-light" role="status">
+                <span class="sr-only">Loading...</span>
+            </div>
+            <div class="spinner-grow text-dark" role="status">
                 <span class="sr-only">Loading...</span>
             </div>
         </div>
-        <?php Pjax::begin([
-            'scrollTo' => 1,
-        ]); ?>
-        <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
+        <?php Pjax::begin(
+            [
+                'scrollTo' => 1
+            ]
+        ); ?>
 
-        <?= GridView::widget([
-            'dataProvider' => $dataProvider,
-            'filterModel' => $searchModel,
+        <?= GridView::widget(
+            [
+                'dataProvider' => $dataProvider,
+                'filterModel' => $searchModel,
+                'layout' => "<span class='pull-left'>{summary}</span><span class='pull-right'>{pager}</span>\n{items}\n{pager}",
+                'pager' => [
+                    'class' => 'yii\bootstrap4\LinkPager',
+                ],
+                'columns' => [
+                    ['class' => SerialColumn::class],
 
-            'columns' => [
-                ['class' => 'yii\grid\SerialColumn'],
+                    'id',
+                    'note:ntext',
 
-                'id',
-                'note:ntext',
-
-                ['class' => 'yii\grid\ActionColumn'],
-            ],
-        ]) ?>
+                    ['class' => ActionColumn::class],
+                ],
+            ]
+        ) ?>
 
         <?php Pjax::end(); ?>
+
+
     </div>
 </div>

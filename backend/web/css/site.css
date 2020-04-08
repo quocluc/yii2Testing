@@ -120,21 +120,3 @@ a.desc:after {
     outline: none;
 }
 
-.grid {
-    padding: 10px;
-    margin: 5px;
-    position: relative;
-}
-
-.grid-loading {
-    background-color: rgba(255, 255, 255, 0.85);
-    position: absolute;
-    left: 0;
-    right: 0;
-    top: 0;
-    bottom: 0;
-    display: none;
-    align-items: center;
-    justify-content: center;
-    /*z-index: 1000;*/
-}
