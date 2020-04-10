@@ -67,7 +67,26 @@ $this->params['breadcrumbs'][] = $this->title;
                     'id',
                     'note:ntext',
 
-                    ['class' => ActionColumn::class],
+                    ['class' => ActionColumn::class,
+                        'buttons' => [
+                            'update' => function ($url, $model) {
+                                return Html::a('<i class="far fa-edit"></i>', $url, [
+                                    'title' => Yii::t('app', 'update')
+                                ]);
+                            },
+                            'view' => function ($url, $model) {
+                                return Html::a('<i class="far fa-eye"></i>', $url, [
+                                    'title' => Yii::t('app', 'view')
+                                ]);
+                            },
+                            'delete' => function ($url, $model) {
+                                return Html::a('<i class="far fa-trash-alt"></i>', $url, [
+                                    'title' => Yii::t('app', 'delete')
+                                ]);
+                            }
+                        ]
+                    ],
+
                 ],
             ]
         ) ?>

@@ -17,10 +17,11 @@ class AppAsset extends AssetBundle
     public $css = [
         'css/site.css',
         'css/custom-gird-view.css',
-        'https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css'
+
     ];
     public $js = [
         'js/site.js',
+        'https://kit.fontawesome.com/1ba9cb19fe.js'
     ];
     public $depends = [
         YiiAsset::class,

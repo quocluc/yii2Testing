@@ -12,11 +12,13 @@ function clickFunction(e) {
 }
 
 function beginLoading(e) {
+    console.log('begin');
     let gridLoading = $("#grid-loading");
     gridLoading.css("display", "flex");
 }
 
 function endLoading(e) {
+    console.log('end');
     let gridLoading = $("#grid-loading");
     gridLoading.css("display", "none");
 }
