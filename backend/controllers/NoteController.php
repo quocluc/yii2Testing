@@ -5,6 +5,7 @@ namespace backend\controllers;
 use Yii;
 use backend\models\database\Notes;
 use backend\models\search\Notes as NotesSearch;
+use yii\helpers\Json;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -123,5 +124,13 @@ class NoteController extends Controller
         }
 
         throw new NotFoundHttpException('The requested page does not exist.');
+    }
+
+    public function actionTabsData()
+    {
+        $searchModel = new NotesSearch();
+        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+        $html = $this->renderPartial('index', ['dataProvider' => $dataProvider, 'searchModel' => $searchModel]);
+        return Json::encode($html);
     }
 }

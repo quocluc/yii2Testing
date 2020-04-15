@@ -20,7 +20,9 @@
         "yiisoft/yii2-swiftmailer": "~2.0.0 || ~2.1.0",
         "mdmsoft/yii2-admin": "~2.0",
         "yiisoft/yii2-bootstrap4": "^2.0",
-        "components/font-awesome": "^5.12"
+        "components/font-awesome": "^5.12",
+        "kartik-v/yii2-tabs-x": "dev-master",
+        "kartik-v/yii2-bootstrap4-dropdown": "@dev"
     },
     "require-dev": {
         "yiisoft/yii2-debug": "~2.1.0",
@@ -44,5 +46,8 @@
             "type": "composer",
             "url": "https://asset-packagist.org"
         }
-    ]
+    ],
+    "scripts": {
+        "backend": "yii serve --docroot=backend/web"
+    }
 }

@@ -1,4 +1,5 @@
 <?php
+
 namespace backend\controllers;
 
 use Yii;
@@ -22,7 +23,7 @@ class SiteController extends Controller
                 'class' => AccessControl::className(),
                 'rules' => [
                     [
-                        'actions' => ['login', 'error'],
+                        'actions' => ['login', 'error', 'tabs-data'],
                         'allow' => true,
                     ],
                     [
@@ -97,4 +98,6 @@ class SiteController extends Controller
 
         return $this->goHome();
     }
+
+
 }
